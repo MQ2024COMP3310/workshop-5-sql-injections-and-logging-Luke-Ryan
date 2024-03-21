@@ -25,8 +25,8 @@ public class App {
         try {// resources\logging.properties
             LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
         } catch (SecurityException | IOException e1) {
-            e1.printStackTrace();
             logger.log(Level.SEVERE,"Error has occured.", e1);
+            e1.printStackTrace();
         }
     }
     // End code for logging exercise
