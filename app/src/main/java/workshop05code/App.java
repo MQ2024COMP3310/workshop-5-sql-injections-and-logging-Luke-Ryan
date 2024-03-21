@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  */
 public class App {
     // Start code for logging exercise
+    private static final Logger logger = Logger.getLogger(App.class.getName());
+    
     static {
         // must set before the Logger
         // loads logging.properties from the classpath
@@ -24,16 +26,16 @@ public class App {
             LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
         } catch (SecurityException | IOException e1) {
             e1.printStackTrace();
+            logger.log(Level.SEVERE,"Error has occured.", e1);
         }
     }
-
-    private static final Logger logger = Logger.getLogger(App.class.getName());
     // End code for logging exercise
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         SQLiteConnectionManager wordleDatabaseConnection = new SQLiteConnectionManager("words.db");
 
         wordleDatabaseConnection.createNewDatabase("words.db");
@@ -59,10 +61,12 @@ public class App {
                 System.out.println(line);
                 wordleDatabaseConnection.addValidWord(i, line);
                 i++;
+                logger.log(Level.INFO,"Added valid word to database.");
             }
 
         } catch (IOException e) {
-            System.out.println("Not able to load . Sorry!");
+            logger.log(Level.WARNING,"Error has occured.", e);
+            System.out.println("Not able to load. Sorry!");
             System.out.println(e.getMessage());
             return;
         }
@@ -80,8 +84,10 @@ public class App {
 
                     if (wordleDatabaseConnection.isValidWord(guess)) { 
                         System.out.println("Success! It is in the the list.\n");
+                        logger.log(Level.INFO,"Successful word guess.");
                     }else{
                         System.out.println("Sorry. This word is NOT in the the list.\n");
+                        logger.log(Level.INFO,"Unsuccessful word guess.");
                     }
 
                     System.out.print("Enter a 4 letter word for a guess or q to quit: " );
@@ -89,6 +95,7 @@ public class App {
                 }
             }
         } catch (NoSuchElementException | IllegalStateException e) {
+            logger.log(Level.WARNING,"Error has occured.", e);
             e.printStackTrace();
         }
 

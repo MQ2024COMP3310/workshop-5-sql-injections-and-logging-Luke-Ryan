@@ -18,17 +18,18 @@ import java.util.logging.Logger;
 
 public class SQLiteConnectionManager {
     //Start code logging exercise
+    private static final Logger logger = Logger.getLogger(SQLiteConnectionManager.class.getName());
+
     static {
         // must set before the Logger
         // loads logging.properties from the classpath
         try {// resources\logging.properties
             LogManager.getLogManager().readConfiguration(new FileInputStream("resources/logging.properties"));
         } catch (SecurityException | IOException e1) {
+            logger.log(Level.SEVERE,"Error has occured.", e1);
             e1.printStackTrace();
         }
     }
-
-    private static final Logger logger = Logger.getLogger(SQLiteConnectionManager.class.getName());
     //End code logging exercise
     
     private String databaseURL = "";
