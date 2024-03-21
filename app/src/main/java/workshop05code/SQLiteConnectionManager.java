@@ -138,7 +138,7 @@ public class SQLiteConnectionManager {
         } catch (SQLException e) {
 //          System.out.println(e.getMessage());
             logger.log(Level.SEVERE, e.getMessage());// some messages shouldn't be seen by the user so we got rid of the println messaged and instead logged it in case of important errors that arise
-    }
+        }
 
     }
 

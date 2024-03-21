@@ -55,7 +55,7 @@ public class App {
         try (BufferedReader br = new BufferedReader(new FileReader("resources/data.txt"))) {
             String line;
             int i = 1;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null && line.matches("[a-z]{4}")) {
                 System.out.println(line);
                 wordleDatabaseConnection.addValidWord(i, line);
                 i++;
@@ -76,7 +76,7 @@ public class App {
             while (guess.matches("[a-z]{4}")) {
 
                 while (!guess.equals("q")) {
-                    System.out.println("You've guessed '" + guess+"'.");
+                    System.out.println("You've guessed '" + guess +"'.");
 
                     if (wordleDatabaseConnection.isValidWord(guess)) { 
                         System.out.println("Success! It is in the the list.\n");
